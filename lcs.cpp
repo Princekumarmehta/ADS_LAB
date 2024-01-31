@@ -97,8 +97,8 @@ int main()
 
     cout << "LCS Array and All Longest Common Subsequences:" << endl;
 
-       // Print All Longest Common Subsequences
-    cout << "All Longest Common Subsequences:" << endl;
+    // Print All Longest Common Subsequences
+    cout << "All Longest Common Subsequence s:" << endl;
     for (const string &lcs : allLCS)
     {
         string reversedLCS = lcs;
