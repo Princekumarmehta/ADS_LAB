@@ -24,8 +24,8 @@ void printParenthesisExpression(vector<vector<int>> k, int i, int j, char &matri
     }
 
     cout << "(";
-    printParenthesisExpression(k, i, k[i][j], matrixName);
-    printParenthesisExpression(k, k[i][j] + 1, j, matrixName);
+    printParenthesisExpression(k, i, k[i][j] - 1, matrixName);
+    printParenthesisExpression(k, k[i][j], j, matrixName);
     cout << ")";
 }
 
@@ -39,13 +39,12 @@ void matrix(vector<int> d, int n)
         for (int i = 0; i < row - count; i++)
         {
             int j = i + count;
-            // dp[i][j] = INT_MAX;
 
             for (int temp = i; temp < j; temp++)
             {
                 int x = dp[i][temp] + dp[temp + 1][j] + (d[i] * d[temp + 1] * d[j + 1]);
                 if (dp[i][j] == 0)
-                { // for the first time it will just update the matrix
+                {
                     dp[i][j] = x;
                     k[i][j] = temp + 1;
                 }
