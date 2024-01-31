@@ -10,7 +10,7 @@ int extended_gcd(int a, int b, int &x, int &y)
         return a;
     }
     int x1, y1;
-    int gcd((extended_gcd(b, a % b, x1, y1)));
+    int gcd = ((extended_gcd(b, a % b, x1, y1)));
     x = y1;
     y = x1 - (a / b) * y1;
     return gcd;

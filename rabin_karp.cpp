@@ -2,47 +2,54 @@
 using namespace std;
 
 const int q = 256;
-
+vector<int> indexes;
+int it = 0;
 int calculate_hash(string s)
 {
-    int score = 0;
-    for (int i = 0; i < s.size(); i++)
+    int ans = 0;
+    int n = s.size();
+    for (int i = 0; i < n; i++)
     {
-        score = (score * q + s[i]) % INT_MAX;
+        ans += ((s[i] - 'a') * q) % INT_MAX;
     }
-    return score;
+    return ans;
 }
 
 int rabinKarp(string s, string p)
 {
-    int p_score = calculate_hash(p);
-    int n = p.size();
-    int temp = 0;
-    for (int i = 0; i <= s.size() - n; i++)
+    int score = calculate_hash(p);
+    int n1 = s.size();
+    int n2 = p.size();
+    int i = 0;
+    while (i <= n1 - n2)
     {
         if (s[i] == p[0])
         {
-            temp = calculate_hash(s.substr(i, n));
-            if (temp == p_score)
-                return i;
+            int temp = calculate_hash(s.substr(i, n2));
+            if (temp == score)
+                indexes.push_back(i);
         }
+        i++;
     }
     return -1;
 }
-
 int main()
 {
-    string s1, s2;
-    cout << "Enter string: \n";
-    cin >> s1;
-    cout << "Enter pattern to be searched in string: \n";
-    cin >> s2;
-    int index = rabinKarp(s1, s2);
-    if (index == -1)
-        cout << "Pattern is not present in String ";
+    string s1;
+    string s2;
+    cout << "Enter string for search: ";
+    getline(cin, s1);
+    cout << "\n Enter patern to be searched in string: ";
+    getline(cin, s2);
+    int ii = rabinKarp(s1, s2);
+    if (indexes.size() == 0)
+        cout << "Not found";
     else
     {
-        cout << "Pattern is found at index " << index << ", after " << index + 1 << " iteration(s)";
+        for (int i = 0; i < indexes.size(); i++)
+        {
+            cout << "pattern is found at " << indexes[i] << endl;
+        }
     }
     return 0;
 }
