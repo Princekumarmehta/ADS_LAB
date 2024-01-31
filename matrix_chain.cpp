@@ -39,15 +39,20 @@ void matrix(vector<int> d, int n)
         for (int i = 0; i < row - count; i++)
         {
             int j = i + count;
-            dp[i][j] = INT_MAX;
+            // dp[i][j] = INT_MAX;
 
             for (int temp = i; temp < j; temp++)
             {
                 int x = dp[i][temp] + dp[temp + 1][j] + (d[i] * d[temp + 1] * d[j + 1]);
-                if (x < dp[i][j])
+                if (dp[i][j] == 0)
+                { // for the first time it will just update the matrix
+                    dp[i][j] = x;
+                    k[i][j] = temp + 1;
+                }
+                else if (x < dp[i][j])
                 {
                     dp[i][j] = x;
-                    k[i][j] = temp;
+                    k[i][j] = temp + 1;
                 }
             }
         }
